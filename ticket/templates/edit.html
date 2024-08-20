@@ -1,0 +1,114 @@
+{% extends "global/base.html" %}
+{% load crispy_forms_tags %}
+{% block contents %}
+{% load config %}
+{% load static %}
+
+<form method="POST" action="">
+    <input type="hidden" name="" value="{{ticket_id}}" id="ticket_id">
+    <div class="row">
+        <div class="col-left">
+            {% csrf_token %}
+            <div class="forms-add">
+                {{forms.subject.label_tag}}
+                {{forms.subject}}
+                
+            </div>
+            <div class="forms-add">
+                {{forms.description.label_tag}}
+                {{forms.description}}
+            </div>
+            <div class="forms-add timeline">
+                <label for="">Historia do chamado</label>
+                
+                    {% for log_ticket in logs_ticket %}
+                        
+                        
+                     
+                    <div class="ticket_history">
+                        <div class="timeline-datetime">
+                            {{log_ticket.datetime_log}} <br>
+                           
+                        </div>
+                        <div class="timeline-art-scrow">
+                            <div class="timeline-scrow"></div>
+                            <div class="timeline-ball"></div>
+                            <div class="timeline-ball"></div>
+                            <div class="timeline-ball"></div>
+                            <div class="timeline-scrow"></div>
+                            <div class="timeline-ball"></div>
+                        </div>
+                        <div class="info-timeline">
+                            
+                            <div class="ticket-info-timeline">{% if log_ticket.log_type == 1 %}Chamado Criado {% else %} Chamado atualizado {% endif %}</div>
+                            <div class="user-info-timeline">
+                                <img src="{% get_media_prefix %}{{log_ticket.user_id|get_perfil_picture}}" alt="">
+                                <div class="timeline-log-detail">
+                                    {% if log_ticket.modified_field.ticket_type %}
+                                    <a href="">Tipo:  {{log_ticket.modified_field.ticket_type|get_display_ticket_type}} </a><br>
+                                    {% endif %}
+                                    {% if log_ticket.modified_field.priority %}
+                                    <a href="">Prioridade: {{log_ticket.modified_field.priority|get_display_priority}}</a><br>
+                                    {% endif %}
+                                    {% if log_ticket.modified_field.work_desk_id %}
+                                    <a href="">Mesa: {{log_ticket.modified_field.work_desk_id|get_display_work_desk}}</a><br>
+                                    {% endif %}
+                                    {% if log_ticket.modified_field.user %}
+                                    <a href="">usuario: {{log_ticket.modified_field.user|get_display_user}}</a><br>
+                                    {% endif %}
+                                    {% if log_ticket.modified_field.category %}
+                                    <a href="">Categoria: {{log_ticket.modified_field.category|get_display_category}}</a><br>
+                                    {% endif %}
+                                   
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                    {% endfor %}
+            </div>
+        </div>
+        <div class="col-right">
+            <div class="forms-add">
+                {{forms.client_id.label_tag}}
+                {{forms.client_id}}
+            </div>
+            <div class="forms-add">
+                {{forms.creation_date.label_tag}}
+                {{forms.creation_date}}
+            </div>
+            <div class="forms-add">
+                {{forms.category.label_tag}}
+                {{forms.category}}
+            </div>
+
+            <div class="forms-add">
+                {{forms.user.label_tag}}
+                {{forms.user}}
+            </div>
+
+            <div class="forms-add">
+                {{forms.work_desk_id.label_tag}}
+                {{forms.work_desk_id}}
+            </div>
+            
+            <div class="forms-add">
+                {{forms.ticket_type.label_tag}}
+                {{forms.ticket_type}}
+            </div>
+            <div class="forms-add">
+                {{forms.priority.label_tag}}
+                {{forms.priority}}
+            </div>
+            <div class="forms-add">
+                {{forms.status.label_tag}}
+                {{forms.status}}
+            </div>
+            
+        </div>
+    </div>
+    <button type="submit" class="button-green">Atualizar Chamado</button>
+</form>
+    
+{% endblock contents %}

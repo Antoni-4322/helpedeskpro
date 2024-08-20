@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "global/partials/_head.html" %}
+   
+</head>
+<body>
+
+    {% include "global/partials/_header.html" %}
+
+    <section class="default light">     
+        <div class="section-body">
+            <div class="section-projects">
+                <div class="section-projects--filters">
+                    <ul>
+                        <a href="{% url "ticket:my_ticket" %}"><li id="op">Tickets</li></a>
+                        <a href="{% url "inventory:home" %}"><li>Inventarios</li></a>
+                        <a href="{% url "reports" %}"><li>Relatorios</li></a>
+                        <li>Tarefas</li>
+                        <li>Biblioteca</li>
+                        <li>Configurações</li>
+                    </ul>
+                </div>
+                
+                <div class="section-main-contents">
+
+                    <div class="section-filters">
+                        <a href="">Tickets °</a>  <br>
+                        <a href="">Pagina inicial</a> 
+                    </div>
+
+                    <div class="main-contents">
+                        <div class="contents">
+
+                                    {% block contents %}
+                                    
+                                    {% endblock contents %}      
+                            
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        
+    </script>
+</body>
+</html>
+
+

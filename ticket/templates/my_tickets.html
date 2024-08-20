@@ -1,0 +1,99 @@
+{% extends "global/base.html" %}
+{% load config %}
+{% block contents %}
+{% load static %}
+<div class="ticket-contents-area">
+<div class="ticket-area">
+    <div class="ticket-area-title">
+        <h4>EM ESPERA</h4>
+        <div class="ticket-title-qtd">20</div>
+    </div>
+    {% for sla in slas %}
+    {% for ticket in sla %}
+
+        {% if ticket.status == "A" %}
+            <a class="ticket-area-contents-a" ticket-id="{{ticket.id}}" progress="{{ticket.progress}}" href="{% url "ticket:edit" ticket.id%}">
+                
+                <div class="ticket-area-contents">
+                    <img src="{% get_media_prefix %}{{ticket.user_id|get_perfil_picture}}" alt="">
+                    
+                    <div class="ticket-list-info">
+                        <div class="ticket-client-name">
+                            {{ticket.client_id_id|get_display_client}}
+                        </div>
+                        <div class="ticket-title">
+                            {{ticket.subject}}
+                        </div>
+                        <div class="ticket-sla-progress">
+                            <div class="progress"></div>
+                        </div>
+                    </div>                            
+                </div>
+            </a>
+        {% endif %}
+    {% endfor %}
+    {% endfor %}
+</div>      
+
+
+
+
+<div class="ticket-area">
+<div class="ticket-area-title started">
+    <h4>EM ANDAMENTO</h4>
+    <div class="ticket-title-qtd">25</div>
+</div>
+
+{% for sla in slas %}
+    {% for ticket in sla %}
+
+        {% if ticket.status == "B" %}
+            <a class="ticket-area-contents-a" ticket-id="{{ticket.id}}" progress="{{ticket.progress}}" href="{% url "ticket:edit" ticket.id%}">
+                <div class="ticket-area-contents">
+                    <img src="{% get_media_prefix %}{{ticket.user_id|get_perfil_picture}}" alt="">
+                    
+                    <div class="ticket-list-info">
+                        <div class="ticket-client-name">
+                            {{ticket.client_id_id|get_display_client}}
+                        </div>
+                        <div class="ticket-title">
+                            {{ticket.subject}}
+                        </div>
+                        <div class="ticket-sla-progress">
+                            <div class="progress"></div>
+                        </div>
+                    </div>                            
+                </div>
+            </a>
+        {% endif %}
+    {% endfor %}
+    {% endfor %}
+</div>
+
+<div class="ticket-area">
+<div class="ticket-area-title late">
+    <h4>ATRASADO</h4>
+    <div class="ticket-title-qtd">25</div>
+</div>
+{% for ticket in tickets %}
+        {% if ticket.status == "A" %}
+        <a href="{% url "ticket:edit" ticket.id%}">
+            <div class="ticket-area-contents">
+                <img src="{{ticket.user.image.url}}" alt="">
+                <div class="ticket-list-info">
+                    <div class="ticket-client-name">
+                        
+                        {{ticket.client_id}}
+                    </div>
+                    <div class="ticket-title">
+                        {{ticket.subject}}
+                    </div>
+                </div>                            
+            </div>
+        </a>
+        {% endif %}
+    {% endfor %}
+
+</div>
+</div>
+{% endblock contents %}

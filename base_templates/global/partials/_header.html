@@ -1,0 +1,26 @@
+<header>
+    <div class="header-first-options">
+        <img src="" alt="">
+        
+        <h2>Helpdesk Pro</h2>
+    </div>
+    <div class="search-in-header">
+        
+        <form action="#" class="search-form">
+            <button class="search-button"><i class="fas fa-search"></i></button>
+            <input type="search" class="search-input" name="search">
+        </form>
+        
+    </div>
+    <div class="header-third-options">
+        
+            <a href="{% url "ticket:add" %}" class="button-green">Novo Chamado</a>
+            <a href="chamado/chamado.html" class="button-orange">Nova Tarefa</a>
+            
+      
+        
+        <img src="{{request.user.image.url}}" alt="">
+    </div>
+
+    
+</header>

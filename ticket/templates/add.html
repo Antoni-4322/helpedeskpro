@@ -1,0 +1,59 @@
+{% extends "global/base.html" %}
+{% load crispy_forms_tags %}
+{% block contents %}
+
+<form method="POST" action="">
+    <div class="row">
+        <div class="col-left">
+            {% csrf_token %}
+            <div class="forms-add">
+                {{forms.subject.label_tag}}
+                {{forms.subject}}
+            </div>
+            <div class="forms-add">
+                {{forms.description.label_tag}}
+                {{forms.description}}
+            </div>
+        </div>
+        <div class="col-right">
+            <div class="forms-add">
+                {{forms.client_id.label_tag}}
+                {{forms.client_id}}
+            </div>
+            <div class="forms-add">
+                {{forms.creation_date.label_tag}}
+                {{forms.creation_date}}
+            </div>
+            <div class="forms-add">
+                {{forms.category.label_tag}}
+                {{forms.category}}
+            </div>
+
+            <div class="forms-add">
+                {{forms.user.label_tag}}
+                {{forms.user}}
+            </div>
+
+            <div class="forms-add">
+                {{forms.work_desk_id.label_tag}}
+                {{forms.work_desk_id}}
+            </div>
+            
+            <div class="forms-add">
+                {{forms.ticket_type.label_tag}}
+                {{forms.ticket_type}}
+            </div>
+            <div class="forms-add">
+                {{forms.priority.label_tag}}
+                {{forms.priority}}
+            </div>
+            <div class="forms-add">
+                {{forms.status.label_tag}}
+                {{forms.status}}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="button-green">Criar Chamado</button>
+</form>    
+    
+{% endblock contents %}
